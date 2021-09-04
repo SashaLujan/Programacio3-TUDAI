@@ -1,1 +1,2 @@
-# Programacio3-entregables
+# Programacio3-TUDAI
+EJERCICIOS ENTREGABLES
