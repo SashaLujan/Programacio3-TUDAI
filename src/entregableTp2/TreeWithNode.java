@@ -86,7 +86,7 @@ public class TreeWithNode {
 		}
 		printPreorder(node.getLeft());
 		printPreorder(node.getRight());
-		System.out.println(node.getValue() + " ");
+		System.out.print(node.getValue() + " ");
 	}
 
 	public void printPreorder() {
@@ -98,8 +98,17 @@ public class TreeWithNode {
 		if (node == null) {
 			return;
 		}
-		System.out.println(node.getValue() + " ");
+		System.out.print(node.getValue() + " ");
+
+		if (node.getLeft()==null) {
+			System.out.print("-");
+		}
+		
 		printPreorder(node.getLeft());
+		
+		if (node.getRight()==null) {
+			System.out.print("-");
+		}
 		printPreorder(node.getRight());
 	}
 
@@ -112,7 +121,7 @@ public class TreeWithNode {
 			return;
 		}
 		printPreorder(node.getLeft());
-		System.out.println(node.getValue() + " ");
+		System.out.print(node.getValue() + " ");
 		printPreorder(node.getRight());
 	}
 
@@ -221,8 +230,73 @@ public class TreeWithNode {
 		}
 		return list;
 	}
-
-	private TreeNode searchNode(int num) {
+	
+	public boolean delete(int valor) {
+		TreeNode aux = root;
+		TreeNode padre = root;
+		boolean esHijoIzq = true;
+		
+		while(aux.getValue() != valor) {
+			padre = aux;
+			if(valor < aux.getValue()) {
+				esHijoIzq = true;
+				aux = aux.getLeft();
+			}
+			else {
+				esHijoIzq = false;
+				aux = aux.getRight();
+			}
+			if (aux == null) {
+				return false;
+			}
+		}
+		
+		if(aux.getLeft() == null && aux.getRight() == null) {
+			if(aux == root) {
+				root = null;
+			}
+			else if(esHijoIzq) {
+				padre.setLeft(null);
+			}
+			else {
+				padre.setRight(null);
+			}
+		} else if(aux.getRight() == null) {
+			if(aux == root) {
+				root = aux.getLeft();
+			}
+			else if(esHijoIzq) {
+				padre.setLeft(aux.getLeft());
+			}
+			else {
+				padre.setRight(aux.getLeft());
+			}
+		} else if(aux.getLeft() == null) {
+			if(aux == root) {
+				root = aux.getRight();
+			}
+			else if(esHijoIzq) {
+				padre.setLeft(aux.getRight());
+			}
+			else {
+				padre.setRight(aux.getRight());
+			}
+		} else {
+			TreeNode nodoReemplazo = getReemplazoNodo(aux);
+			if(aux == root) {
+				root = nodoReemplazo;
+			}
+			else if(esHijoIzq) {
+				padre.setLeft(nodoReemplazo);
+			}
+			else {
+				padre.setRight(nodoReemplazo);
+			}
+			nodoReemplazo.setLeft(aux.getLeft());
+		}
+		return true; 
+	}
+	private TreeNode buscarNodo(int num) {
 		TreeNode aux = this.root;
 		while (aux.getValue() != num) {
 			if (num < aux.getValue()) {
@@ -237,9 +311,21 @@ public class TreeWithNode {
 		return aux;
 	}
 
-	public boolean delete(int i) {
-		return false;
-		// TODO Auto-generated method stub
+	private TreeNode getReemplazoNodo(TreeNode nodoReemp){
+		TreeNode reemplazaPadre = nodoReemp;
+		TreeNode reemplazo = nodoReemp;
+		TreeNode aux = nodoReemp.getRight();
 
+		while (aux != null){
+			reemplazaPadre = reemplazo;
+			reemplazo = aux;
+			aux = aux.getLeft();
+		}
+		if (reemplazo != nodoReemp.getRight()){
+			reemplazaPadre.setLeft(reemplazo.getRight());
+			reemplazo.setRight(nodoReemp.getRight());
+		}
+		System.out.println("El nodo reemplazo es: " + reemplazo.getValue());
+		return reemplazo;
 	}
 }
