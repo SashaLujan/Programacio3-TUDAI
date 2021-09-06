@@ -1,7 +1,7 @@
 package entregableTp2;
 
 public class TreeNode {
-	
+
 	private int value;
 	private TreeNode left;
 	private TreeNode right;
@@ -17,7 +17,7 @@ public class TreeNode {
 		this.left = null;
 		this.right = null;
 	}
-	
+
 	public TreeNode getLeft() {
 		return left;
 	}
@@ -37,8 +37,8 @@ public class TreeNode {
 	public Integer getValue() {
 		return value;
 	}
-	
-	public void setValor(int value) { 
-		this.value = value; 
+
+	public void setValor(int value) {
+		this.value = value;
 	}
 }

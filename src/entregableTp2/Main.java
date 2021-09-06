@@ -9,34 +9,53 @@ public class Main {
 		TreeWithNode miArbol = new TreeWithNode(valoresIniciales);
 
 		miArbol.printPreorder();
+		System.out.println("--------------------");
 		System.out.println( miArbol.getMaxElem());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getHeight());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getLongestBranch());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getElementAtLevel(2));
+		System.out.println("--------------------");
 		System.out.println( miArbol.getFrontera());
+		System.out.println("--------------------");
 
 		miArbol.add(23);
 		miArbol.add(4);
 		miArbol.delete(11);
 		miArbol.delete(25);
 
+		System.out.println("--------------------");
 		miArbol.printPreorder();
+		System.out.println("--------------------");
 		System.out.println( miArbol.getMaxElem());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getHeight());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getLongestBranch());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getElementAtLevel(2));
+		System.out.println("--------------------");
 		System.out.println( miArbol.getFrontera());
+		System.out.println("--------------------");
 
 		miArbol.add(65);
 		miArbol.delete(8);
 		miArbol.delete(10);
 		miArbol.add(55);
 
+		System.out.println("--------------------");
 		miArbol.printPreorder();
+		System.out.println("--------------------");
 		System.out.println( miArbol.getMaxElem());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getHeight());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getLongestBranch());
+		System.out.println("--------------------");
 		System.out.println( miArbol.getElementAtLevel(2));
+		System.out.println("--------------------");
 		System.out.println( miArbol.getFrontera());
 	}
 

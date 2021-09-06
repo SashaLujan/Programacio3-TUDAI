@@ -123,8 +123,31 @@ public class TreeWithNode {
 	}
 
 	private LinkedList<Integer> getLongestBranchAux(TreeNode puntero) {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<Integer> leftList = new LinkedList<Integer>();
+		LinkedList<Integer> rightList = new LinkedList<Integer>();
+		LinkedList<Integer> finalList = new LinkedList<Integer>();
+
+		if (puntero == null) {
+			return finalList;
+		}
+		if (puntero.getLeft() == null && puntero.getRight() == null) {
+			finalList.add(puntero.getValue());
+			return finalList;
+		}
+		if (puntero.getLeft() != null) {
+			leftList.add(puntero.getValue());
+			leftList.addAll(getLongestBranchAux(puntero.getLeft()));
+		}
+		if (puntero.getRight() != null) {
+			rightList.add(puntero.getValue());
+			rightList.addAll(getLongestBranchAux(puntero.getRight()));
+		}
+		if (rightList.size() >= leftList.size()) {
+			finalList = rightList;
+		} else {
+			finalList = leftList;
+		}
+		return finalList;
 	}
 
 	public LinkedList<Integer> getFrontera() {
@@ -134,21 +157,21 @@ public class TreeWithNode {
 	}
 
 	private LinkedList<Integer> listarHojas(TreeNode puntero) {
-		LinkedList<Integer> lista = new LinkedList<Integer>();
+		LinkedList<Integer> list = new LinkedList<Integer>();
 
 		if (puntero == null) {
-			return lista;
+			return list;
 		}
 		if (puntero.getLeft() == null && puntero.getRight() == null) {
-			lista.add(puntero.getValue());
+			list.add(puntero.getValue());
 		}
 		if (puntero.getLeft() != null) {
-			lista.addAll(listarHojas(puntero.getLeft()));
+			list.addAll(listarHojas(puntero.getLeft()));
 		}
 		if (puntero.getRight() != null) {
-			lista.addAll(listarHojas(puntero.getRight()));
+			list.addAll(listarHojas(puntero.getRight()));
 		}
-		return lista;
+		return list;
 	}
 
 	public Integer getMaxElem() {
@@ -177,9 +200,41 @@ public class TreeWithNode {
 		return false;
 	}
 
-	public LinkedList<TreeNode> getElementAtLevel(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public LinkedList<Integer> getElementAtLevel(int level) {
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		if (this.root != null) {
+			list = getElementAtLevelList(level, this.root);
+		}
+		return list;
+	}
+
+	private LinkedList<Integer> getElementAtLevelList(int level, TreeNode puntero) {
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		if (puntero == null) {
+			return list;
+		}
+		if (level == 0) {
+			list.add(puntero.getValue());
+		} else {
+			list.addAll(getElementAtLevelList(level - 1, puntero.getLeft()));
+			list.addAll(getElementAtLevelList(level - 1, puntero.getRight()));
+		}
+		return list;
+	}
+
+	private TreeNode searchNode(int num) {
+		TreeNode aux = this.root;
+		while (aux.getValue() != num) {
+			if (num < aux.getValue()) {
+				aux = aux.getLeft();
+			} else {
+				aux = aux.getRight();
+			}
+			if (aux == null) {
+				return null;
+			}
+		}
+		return aux;
 	}
 
 	public boolean delete(int i) {

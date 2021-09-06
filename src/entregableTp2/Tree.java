@@ -46,7 +46,7 @@ public class Tree {
 
 			int higher = Math.max(heightLeft, heightRight);
 
-			return higher; //retorna mayor
+			return higher; // retorna mayor
 		}
 	}
 
