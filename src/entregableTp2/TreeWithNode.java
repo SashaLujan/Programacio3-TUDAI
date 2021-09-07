@@ -125,10 +125,10 @@ public class TreeWithNode {
 		printPreorder(node.getRight());
 	}
 
-	public LinkedList<Integer> getLongestBranch() {
-		LinkedList<Integer> ramaMasLarga;
-		ramaMasLarga = getLongestBranchAux(this.root);
-		return ramaMasLarga;
+	public LinkedList<Integer> getLongestBranch() { //retorna la rama mas larga
+		LinkedList<Integer> list;
+		list = getLongestBranchAux(this.root);
+		return list;
 	}
 
 	private LinkedList<Integer> getLongestBranchAux(TreeNode puntero) {
@@ -182,6 +182,10 @@ public class TreeWithNode {
 		}
 		return list;
 	}
+	
+	public boolean isSheet(TreeNode puntero) { //retorna si un nodo es Hoja o no
+		return (puntero.getLeft() == null && puntero.getRight() == null);
+	}
 
 	public Integer getMaxElem() {
 		if (root == null)
@@ -231,14 +235,14 @@ public class TreeWithNode {
 		return list;
 	}
 	
-	public boolean delete(int valor) {
+	public boolean delete(int value) {
+		boolean esHijoIzq = false;
 		TreeNode aux = root;
 		TreeNode padre = root;
-		boolean esHijoIzq = true;
 		
-		while(aux.getValue() != valor) {
+		while(aux.getValue() != value) {
 			padre = aux;
-			if(valor < aux.getValue()) {
+			if(value < aux.getValue()) {
 				esHijoIzq = true;
 				aux = aux.getLeft();
 			}
@@ -282,7 +286,7 @@ public class TreeWithNode {
 				padre.setRight(aux.getRight());
 			}
 		} else {
-			TreeNode nodoReemplazo = getReemplazoNodo(aux);
+			TreeNode nodoReemplazo = searchNode(aux);
 			if(aux == root) {
 				root = nodoReemplazo;
 			}
@@ -295,23 +299,10 @@ public class TreeWithNode {
 			nodoReemplazo.setLeft(aux.getLeft());
 		}
 		return true; 
-	}
-	private TreeNode buscarNodo(int num) {
-		TreeNode aux = this.root;
-		while (aux.getValue() != num) {
-			if (num < aux.getValue()) {
-				aux = aux.getLeft();
-			} else {
-				aux = aux.getRight();
-			}
-			if (aux == null) {
-				return null;
-			}
-		}
-		return aux;
+		
 	}
 
-	private TreeNode getReemplazoNodo(TreeNode nodoReemp){
+	public TreeNode searchNode(TreeNode nodoReemp) { //busca el nodo más a la derecha del sub Árbol izquierdo
 		TreeNode reemplazaPadre = nodoReemp;
 		TreeNode reemplazo = nodoReemp;
 		TreeNode aux = nodoReemp.getRight();
@@ -328,4 +319,6 @@ public class TreeWithNode {
 		System.out.println("El nodo reemplazo es: " + reemplazo.getValue());
 		return reemplazo;
 	}
+	
+	
 }
