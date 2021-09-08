@@ -99,7 +99,7 @@ public class TreeWithNode {
 		printPreOrder(this.root);
 	}
 
-	// Complejidad O(n) donde n es la cantidad de nodos del arbol
+	// complejidad O(n) donde n es la cantidad de nodos del arbol
 	public void printPreOrder(TreeNode node) {
 
 		if (node == null) {
@@ -168,29 +168,28 @@ public class TreeWithNode {
 		return finalList;
 	}
 
-	// complejidad O(n) donde n es la cantidad de arboles
-	public LinkedList<Integer> getFrontera(TreeNode puntero) {
-		LinkedList<Integer> border = new LinkedList<Integer>();
-
-		if (this.isEmpty()) {
-			return border;
-		} else {
-			if (puntero.getLeft() == null && puntero.getRight() == null) {
-				border.add(puntero.getValue());
-			}
-			if (puntero.getLeft() != null) {
-				border.addAll(getFrontera(puntero.getLeft()));
-			}
-			if (puntero.getRight() != null) {
-				border.addAll(getFrontera(puntero.getRight()));
-			}
-		}
-		return border;
+	public LinkedList<Integer> getFrontera() { // retorna una lista con las hojas del arbol
+		LinkedList<Integer> hojas = new LinkedList<Integer>();
+		hojas = getFrontera(root);
+		return hojas;
 	}
 
-	// complejidad O(1)
-	public boolean isSheet(TreeNode puntero) { // retorna si un nodo es Hoja o no
-		return (puntero.getLeft() == null && puntero.getRight() == null);
+	private LinkedList<Integer> getFrontera(TreeNode puntero) {
+		LinkedList<Integer> list = new LinkedList<Integer>();
+
+		if (puntero == null) {
+			return list;
+		}
+		if (puntero.getLeft() == null && puntero.getRight() == null) {
+			list.add(puntero.getValue());
+		}
+		if (puntero.getLeft() != null) {
+			list.addAll(getFrontera(puntero.getLeft()));
+		}
+		if (puntero.getRight() != null) {
+			list.addAll(getFrontera(puntero.getRight()));
+		}
+		return list;
 	}
 
 	// complejidad O(h) donde h es la logitud de la rama mas larga
@@ -323,14 +322,47 @@ public class TreeWithNode {
 		return reemplazo;
 	}
 
-	public LinkedList<Integer> differenceBetweenAdjacentSheets() {
+	// complejidad O(n) donde n es la cantidad de arboles
+	public LinkedList<Integer> differenceBetweenAdjacentSheets() { // retorna una lista con los resultados de la
+																	// diferencia entre las hojas de derecha a izquierda
+		LinkedList<Integer> tmp = new LinkedList<Integer>();
 
+		return differenceBetweenAdjacentSheets(this.root, tmp);
+	}
+
+	private LinkedList<Integer> differenceBetweenAdjacentSheets(TreeNode node, LinkedList<Integer> tmp) {
+		TreeNode aux = node.getRight();
 		LinkedList<Integer> list = new LinkedList<Integer>();
 
-		return this.differenceBetweenAdjacentSheets(list);
+		if (aux != null) {
+			if (aux.isLeaf()) {
+				if (tmp.isEmpty()) {
+					tmp.add(aux.getValue());
+				} else {
+					int value = tmp.get(0) - aux.getValue();
+					tmp.set(0, aux.getValue());
+					list.add(value);
+				}
+			} else {
+				list.addAll(differenceBetweenAdjacentSheets(aux, tmp));
+			}
+		}
+
+		TreeNode aux2 = node.getLeft();
+		if (aux2 != null) {
+			if (aux2.isLeaf()) {
+				if (tmp.isEmpty()) {
+					tmp.add(aux2.getValue());
+				} else {
+					int value = tmp.get(0) - aux2.getValue();
+					tmp.set(0, aux2.getValue());
+					list.add(value);
+				}
+			} else {
+				list.addAll(differenceBetweenAdjacentSheets(aux2, tmp));
+			}
+		}
+		return list;
 	}
 
-	private LinkedList<Integer> differenceBetweenAdjacentSheets(LinkedList<Integer> list) {
-		return list;// paso por parámetros una lista de hojas
-	}
 }

@@ -41,4 +41,8 @@ public class TreeNode {
 	public void setValor(int value) {
 		this.value = value;
 	}
+
+	public boolean isLeaf() {
+		return (this.left == null && this.right == null);
+	}
 }
