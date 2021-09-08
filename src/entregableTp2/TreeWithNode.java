@@ -10,6 +10,7 @@ public class TreeWithNode {
 		this.root = null;
 	}
 
+	// complejidad O(n*h) donde n es el tamaño del arreglo y h la altura del arbol
 	public TreeWithNode(int[] valoresIniciales) {
 		this.root = null;
 		for (int i = 0; i < valoresIniciales.length; i++) {
@@ -43,13 +44,15 @@ public class TreeWithNode {
 		}
 	}
 
-	public int getHeight() {
+	// complejidad O(n) donde n es la cantidad de nodos del arbol
+	public int getHeight() { // retorna la altura del arbol
 		if (this.root == null)
 			return 0;
 		else
 			return this.getHeight(this.root); // O(n)
 	}
 
+	// complejidad O(n) donde n es la cantidad de nodos del arbol
 	private int getHeight(TreeNode cursor) {
 		if (cursor.getLeft() == null && cursor.getRight() == null) { // Es una hoja
 			return 0; // tengo altura 0
@@ -66,66 +69,72 @@ public class TreeWithNode {
 		}
 	}
 
-	public Integer getRoot() {
+	// complejidad O(1), es constante ya que siempre devuelve un valor
+	public Integer getRoot() { // retorna los datos de la raiz
 		if (this.root != null)
 			return this.root.getValue();
 		return null;
 	}
 
-	public boolean isEmpty() {
+	// complejidad O(1), es constante ya que siempre devuelve un valor
+	public boolean isEmpty() { // retorna si esta vacio no
 		return this.root == null;
 	}
 
-	public void printPostorder() {
-		printPostorder(this.root);
+	public void printPostOrder() { // recorrido post order
+		printPostOrder(this.root);
 	}
 
-	public void printPostorder(TreeNode node) {
+	// Complejidad O(n) donde n es la cantidad de nodos del arbol
+	public void printPostOrder(TreeNode node) {
 		if (node == null) {
 			return;
 		}
-		printPreorder(node.getLeft());
-		printPreorder(node.getRight());
+		printPreOrder(node.getLeft());
+		printPreOrder(node.getRight());
 		System.out.print(node.getValue() + " ");
 	}
 
-	public void printPreorder() {
-		printPreorder(this.root);
+	public void printPreOrder() { // recorrido pre order
+		printPreOrder(this.root);
 	}
 
-	public void printPreorder(TreeNode node) {
+	// Complejidad O(n) donde n es la cantidad de nodos del arbol
+	public void printPreOrder(TreeNode node) {
 
 		if (node == null) {
 			return;
 		}
 		System.out.print(node.getValue() + " ");
 
-		if (node.getLeft()==null) {
+		if (node.getLeft() == null) {
 			System.out.print("-");
 		}
-		
-		printPreorder(node.getLeft());
-		
-		if (node.getRight()==null) {
+
+		printPreOrder(node.getLeft());
+
+		if (node.getRight() == null) {
 			System.out.print("-");
 		}
-		printPreorder(node.getRight());
+		printPreOrder(node.getRight());
 	}
 
-	public void printInorder() {
-		printInorder(this.root);
+	public void printInOrder() { // recorrido in order
+		printInOrder(this.root);
 	}
 
-	public void printInorder(TreeNode node) {
+	// complejidad O(n) donde n es la cantidad de nodos del arbol
+	public void printInOrder(TreeNode node) {
 		if (node == null) {
 			return;
 		}
-		printPreorder(node.getLeft());
+		printInOrder(node.getLeft());
 		System.out.print(node.getValue() + " ");
-		printPreorder(node.getRight());
+		printInOrder(node.getRight());
 	}
 
-	public LinkedList<Integer> getLongestBranch() { //retorna la rama mas larga
+	// complejidad O(n) donde n es la cantidad de nodos del arbol.
+	public LinkedList<Integer> getLongestBranch() {
 		LinkedList<Integer> list;
 		list = getLongestBranchAux(this.root);
 		return list;
@@ -159,34 +168,32 @@ public class TreeWithNode {
 		return finalList;
 	}
 
-	public LinkedList<Integer> getFrontera() {
-		LinkedList<Integer> hojas = new LinkedList<Integer>();
-		hojas = listarHojas(root);
-		return hojas;
+	// complejidad O(n) donde n es la cantidad de arboles
+	public LinkedList<Integer> getFrontera(TreeNode puntero) {
+		LinkedList<Integer> border = new LinkedList<Integer>();
+
+		if (this.isEmpty()) {
+			return border;
+		} else {
+			if (puntero.getLeft() == null && puntero.getRight() == null) {
+				border.add(puntero.getValue());
+			}
+			if (puntero.getLeft() != null) {
+				border.addAll(getFrontera(puntero.getLeft()));
+			}
+			if (puntero.getRight() != null) {
+				border.addAll(getFrontera(puntero.getRight()));
+			}
+		}
+		return border;
 	}
 
-	private LinkedList<Integer> listarHojas(TreeNode puntero) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
-
-		if (puntero == null) {
-			return list;
-		}
-		if (puntero.getLeft() == null && puntero.getRight() == null) {
-			list.add(puntero.getValue());
-		}
-		if (puntero.getLeft() != null) {
-			list.addAll(listarHojas(puntero.getLeft()));
-		}
-		if (puntero.getRight() != null) {
-			list.addAll(listarHojas(puntero.getRight()));
-		}
-		return list;
-	}
-	
-	public boolean isSheet(TreeNode puntero) { //retorna si un nodo es Hoja o no
+	// complejidad O(1)
+	public boolean isSheet(TreeNode puntero) { // retorna si un nodo es Hoja o no
 		return (puntero.getLeft() == null && puntero.getRight() == null);
 	}
 
+	// complejidad O(h) donde h es la logitud de la rama mas larga
 	public Integer getMaxElem() {
 		if (root == null)
 			return null;
@@ -199,7 +206,10 @@ public class TreeWithNode {
 		}
 	}
 
-	public boolean hasElem(int info) {
+	// Complejidad O(n) donde n es la cantidad de nodos del arbol
+	// en el peor de los casos tiene que recorrer todo el arbol para encontrar el
+	// valor.
+	public boolean hasElem(int info) { // retorna si tiene o no un elemento
 		TreeNode nodo = root;
 		while (nodo != null) {
 			if (info == nodo.getValue()) {
@@ -221,7 +231,9 @@ public class TreeWithNode {
 		return list;
 	}
 
-	private LinkedList<Integer> getElementAtLevelList(int level, TreeNode puntero) {
+	// complejidad O(n) donde n es el numero de nodos del arbol
+	private LinkedList<Integer> getElementAtLevelList(int level, TreeNode puntero) { // retorna la lista con los nodos
+																						// de un nivel pedido
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		if (puntero == null) {
 			return list;
@@ -234,19 +246,18 @@ public class TreeWithNode {
 		}
 		return list;
 	}
-	
+
 	public boolean delete(int value) {
 		boolean esHijoIzq = false;
 		TreeNode aux = root;
 		TreeNode padre = root;
-		
-		while(aux.getValue() != value) {
+
+		while (aux.getValue() != value) {
 			padre = aux;
-			if(value < aux.getValue()) {
+			if (value < aux.getValue()) {
 				esHijoIzq = true;
 				aux = aux.getLeft();
-			}
-			else {
+			} else {
 				esHijoIzq = false;
 				aux = aux.getRight();
 			}
@@ -254,71 +265,72 @@ public class TreeWithNode {
 				return false;
 			}
 		}
-		
-		if(aux.getLeft() == null && aux.getRight() == null) {
-			if(aux == root) {
+
+		if (aux.getLeft() == null && aux.getRight() == null) {
+			if (aux == root) {
 				root = null;
-			}
-			else if(esHijoIzq) {
+			} else if (esHijoIzq) {
 				padre.setLeft(null);
-			}
-			else {
+			} else {
 				padre.setRight(null);
 			}
-		} else if(aux.getRight() == null) {
-			if(aux == root) {
+		} else if (aux.getRight() == null) {
+			if (aux == root) {
 				root = aux.getLeft();
-			}
-			else if(esHijoIzq) {
+			} else if (esHijoIzq) {
 				padre.setLeft(aux.getLeft());
-			}
-			else {
+			} else {
 				padre.setRight(aux.getLeft());
 			}
-		} else if(aux.getLeft() == null) {
-			if(aux == root) {
+		} else if (aux.getLeft() == null) {
+			if (aux == root) {
 				root = aux.getRight();
-			}
-			else if(esHijoIzq) {
+			} else if (esHijoIzq) {
 				padre.setLeft(aux.getRight());
-			}
-			else {
+			} else {
 				padre.setRight(aux.getRight());
 			}
 		} else {
-			TreeNode nodoReemplazo = searchNode(aux);
-			if(aux == root) {
+			TreeNode nodoReemplazo = replacementNode(aux);
+			if (aux == root) {
 				root = nodoReemplazo;
-			}
-			else if(esHijoIzq) {
+			} else if (esHijoIzq) {
 				padre.setLeft(nodoReemplazo);
-			}
-			else {
+			} else {
 				padre.setRight(nodoReemplazo);
 			}
 			nodoReemplazo.setLeft(aux.getLeft());
 		}
-		return true; 
-		
+		return true;
+
 	}
 
-	public TreeNode searchNode(TreeNode nodoReemp) { //busca el nodo más a la derecha del sub Árbol izquierdo
+	public TreeNode replacementNode(TreeNode nodoReemp) { // busca el nodo más a la derecha del sub Árbol izquierda
 		TreeNode reemplazaPadre = nodoReemp;
 		TreeNode reemplazo = nodoReemp;
 		TreeNode aux = nodoReemp.getRight();
 
-		while (aux != null){
+		while (aux != null) {
 			reemplazaPadre = reemplazo;
 			reemplazo = aux;
 			aux = aux.getLeft();
 		}
-		if (reemplazo != nodoReemp.getRight()){
+		if (reemplazo != nodoReemp.getRight()) {
 			reemplazaPadre.setLeft(reemplazo.getRight());
 			reemplazo.setRight(nodoReemp.getRight());
 		}
 		System.out.println("El nodo reemplazo es: " + reemplazo.getValue());
 		return reemplazo;
 	}
-	
-	
+
+	public LinkedList<Integer> differenceBetweenAdjacentSheets() {
+
+		LinkedList<Integer> list = new LinkedList<Integer>();
+
+		return this.differenceBetweenAdjacentSheets(list);
+	}
+
+	private LinkedList<Integer> differenceBetweenAdjacentSheets(LinkedList<Integer> list) {
+		return list;// paso por parámetros una lista de hojas
+	}
 }

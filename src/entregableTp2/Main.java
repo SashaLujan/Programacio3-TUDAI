@@ -60,15 +60,12 @@ public class Main {
 		miArbol.delete(10);
 		miArbol.add(55);
 
-		System.out.println("El recorrido Preorder es: ");
+		System.out.println("/nEl recorrido Preorder es: ");
 		miArbol.printPreorder();
-		System.out.println();
-		System.out.println("El recorrido Inorder es: ");
+		System.out.println("/nEl recorrido Inorder es: ");
 		miArbol.printInorder();
-		System.out.println();
-		System.out.println("El recorrido es: ");
+		System.out.println("/nEl recorrido es: ");
 		miArbol.printPostorder();
-		System.out.println();
 		System.out.println("mayor elemento: ");
 		System.out.println( miArbol.getMaxElem());
 		System.out.println("la altura: ");
@@ -79,6 +76,8 @@ public class Main {
 		System.out.println( miArbol.getElementAtLevel(2));
 		System.out.println("las hojas del arbol: ");
 		System.out.println( miArbol.getFrontera());
+		System.out.print("Diferencia entre hojas adyacentes de derecha a izquierda: ");
+		System.out.println(miArbol.differenceBetweenAdjacentSheets());
 		System.out.println("--------------------");
 		
 	}
