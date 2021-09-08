@@ -8,13 +8,13 @@ public class Main {
 		int[] valoresIniciales = new int[] {10, 5, 12, 2, 1, 3, 8, 6, 11, 25, 22, 30};
 		TreeWithNode miArbol = new TreeWithNode(valoresIniciales);
 
-		System.out.println("El recorrido Preorder es: ");
+		System.out.println("El recorrido PreOrder es: ");
 		miArbol.printPreOrder();
 		System.out.println();
-		System.out.println("El recorrido Inorder es: ");
+		System.out.println("El recorrido InOrder es: ");
 		miArbol.printInOrder();
 		System.out.println();
-		System.out.println("El recorrido es: ");
+		System.out.println("El recorrido PostOrder es: ");
 		miArbol.printPostOrder();
 		System.out.println();
 		System.out.println("mayor elemento: ");
@@ -34,13 +34,13 @@ public class Main {
 		miArbol.delete(11);
 		miArbol.delete(25);
 
-		System.out.println("El recorrido Preorder es: ");
+		System.out.println("El recorrido PreOrder es: ");
 		miArbol.printPreOrder();
 		System.out.println();
-		System.out.println("El recorrido Inorder es: ");
+		System.out.println("El recorrido InOrder es: ");
 		miArbol.printInOrder();
 		System.out.println();
-		System.out.println("El recorrido es: ");
+		System.out.println("El recorrido PostOrder es: ");
 		miArbol.printPostOrder();
 		System.out.println();
 		System.out.println("mayor elemento: ");
@@ -60,13 +60,13 @@ public class Main {
 		miArbol.delete(10);
 		miArbol.add(55);
 
-		System.out.println("El recorrido Preorder es: ");
+		System.out.println("El recorrido PreOrder es: ");
 		miArbol.printPreOrder();
 		System.out.println();
-		System.out.println("El recorrido Inorder es: ");
+		System.out.println("El recorrido InOrder es: ");
 		miArbol.printInOrder();
 		System.out.println();
-		System.out.println("El recorrido es: ");
+		System.out.println("El recorrido PostOrder es: ");
 		miArbol.printPostOrder();
 		System.out.println();
 		System.out.println("mayor elemento: ");
