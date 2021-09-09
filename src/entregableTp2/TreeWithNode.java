@@ -26,6 +26,7 @@ public class TreeWithNode {
 			this.add(this.root, value);
 	}
 
+	// complejidad O(h) donde h es la altura del arbol
 	private void add(TreeNode actual, int value) {
 		if (actual.getValue() > value) {
 			if (actual.getLeft() == null) {
@@ -140,6 +141,7 @@ public class TreeWithNode {
 		return list;
 	}
 
+	// complejidad O(n) donde n es la cantidad de nodos del arbol.
 	private LinkedList<Integer> getLongestBranchAux(TreeNode puntero) {
 		LinkedList<Integer> leftList = new LinkedList<Integer>();
 		LinkedList<Integer> rightList = new LinkedList<Integer>();
@@ -168,12 +170,14 @@ public class TreeWithNode {
 		return finalList;
 	}
 
+	// complejidad O(n) donde n es la cantidad de arboles
 	public LinkedList<Integer> getFrontera() { // retorna una lista con las hojas del arbol
 		LinkedList<Integer> hojas = new LinkedList<Integer>();
 		hojas = getFrontera(root);
 		return hojas;
 	}
 
+	// complejidad O(n) donde n es la cantidad de arboles
 	private LinkedList<Integer> getFrontera(TreeNode puntero) {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 
@@ -222,7 +226,9 @@ public class TreeWithNode {
 		return false;
 	}
 
-	public LinkedList<Integer> getElementAtLevel(int level) {
+	// complejidad O(n) donde n es el numero de nodos del arbol
+	public LinkedList<Integer> getElementAtLevel(int level) { // retorna los valores de todos los nodos que pertenecen a
+																// un nivel
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		if (this.root != null) {
 			list = getElementAtLevelList(level, this.root);
@@ -246,6 +252,7 @@ public class TreeWithNode {
 		return list;
 	}
 
+	// complejidad O(h) donde h es la altura del arbol
 	public boolean delete(int value) {
 		boolean esHijoIzq = false;
 		TreeNode aux = root;
@@ -304,6 +311,7 @@ public class TreeWithNode {
 
 	}
 
+	// complejidad O(h)
 	public TreeNode replacementNode(TreeNode nodoReemp) { // busca el nodo más a la derecha del sub Árbol izquierda
 		TreeNode reemplazaPadre = nodoReemp;
 		TreeNode reemplazo = nodoReemp;
@@ -330,6 +338,7 @@ public class TreeWithNode {
 		return differenceBetweenAdjacentSheets(this.root, tmp);
 	}
 
+	// complejidad O(n) donde n es la cantidad de arboles
 	private LinkedList<Integer> differenceBetweenAdjacentSheets(TreeNode node, LinkedList<Integer> tmp) {
 		TreeNode aux = node.getRight();
 		LinkedList<Integer> list = new LinkedList<Integer>();
