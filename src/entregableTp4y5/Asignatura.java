@@ -2,7 +2,7 @@ package entregableTp4y5;
 
 import java.util.ArrayList;
 
-public class Biblioteca {
-	ArrayList<Libro>libros;
+public class Asignatura {
 	ArrayList<Alumno>alumnos;
+	int puntajeMin;
 }
