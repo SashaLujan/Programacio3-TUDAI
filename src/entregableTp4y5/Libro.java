@@ -1,40 +1,33 @@
 package entregableTp4y5;
 
-public class Libro {
+public class Libro implements Comparable<Libro> {
 
-	private int id;
-	private String nombre;
+	private String id;
+	private String titulo;
 	private String autor;
 	private String genero;
-	private int cantPaginas;
-	private int cnatEjemDispo;
-	private int puntaje;
-	
-	public Libro(int id, String nombre, String autor, String genero, int cantPaginas, int cnatEjemDispo, int puntaje) {
-		
-		this.id = id;
-		this.nombre = nombre;
+	private Integer cantPaginas;
+	private Integer cantEjemDispo;
+	private Integer puntaje;
+
+	public Libro(String idLibro, String titulo, String autor, String genero, Integer cantPaginas, Integer cantEjemDispo,
+			Integer puntaje) {
+
+		this.id = idLibro;
+		this.titulo = titulo;
 		this.autor = autor;
 		this.genero = genero;
 		this.cantPaginas = cantPaginas;
-		this.cnatEjemDispo = cnatEjemDispo;
+		this.cantEjemDispo = cantEjemDispo;
 		this.puntaje = puntaje;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
-		return nombre;
+		return titulo;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.titulo = nombre;
 	}
 
 	public String getGenero() {
@@ -53,14 +46,6 @@ public class Libro {
 		this.cantPaginas = cantPaginas;
 	}
 
-	public int getCnatEjemDispo() {
-		return cnatEjemDispo;
-	}
-
-	public void setCnatEjemDispo(int cnatEjemDispo) {
-		this.cnatEjemDispo = cnatEjemDispo;
-	}
-
 	public int getPuntaje() {
 		return puntaje;
 	}
@@ -69,6 +54,38 @@ public class Libro {
 		this.puntaje = puntaje;
 	}
 	
+	public String id() {
+		return id;
+	}
 	
+	@Override
+	public Libro clone() {
+		return new Libro(id, titulo, autor, genero, cantPaginas, puntaje, cantEjemDispo);
+	}
+
+	@Override
+	public String toString() {
+		return this.id + " = " + this.puntaje;
+	}
+
+	@Override
+	public int compareTo(Libro o) {
+		return o.getPuntaje() - this.puntaje;
+	}
+
+	public void restarEjemplar() {
+		cantEjemDispo--;
+	}
+
+	public int ejemplares() {
+		return cantEjemDispo;
+	}
+
+	public boolean ejemplarDiponible() {
+		return cantEjemDispo > 0;
+	}
 	
+	public void sumarEjemplar() {
+		cantEjemDispo++;
+	}
 }

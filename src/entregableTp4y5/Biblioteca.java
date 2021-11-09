@@ -3,21 +3,24 @@ package entregableTp4y5;
 import java.util.ArrayList;
 
 public class Biblioteca {
-	private ArrayList<Libro> libros;
-	private ArrayList<Alumno> alumnos;
 	
-	public Biblioteca(ArrayList<Libro> libros, ArrayList<Alumno> alumnos) {
+	private ArrayList<Libro> libros;
+	private CSVReaderLibros libroReader;
+	
+	public Biblioteca(String Path) {
 		
-		this.libros = libros;
-		this.alumnos = alumnos;
+		this.libroReader = new CSVReaderLibros();
+		libroReader.setPath(Path);
+		this.libros = libroReader.read();
 	}
 
 	public ArrayList<Libro> getLibros() {
-		return libros;
-	}
-
-	public void setLibros(ArrayList<Libro> libros) {
-		this.libros = libros;
+		
+		ArrayList<Libro> copia = new ArrayList<>();
+		for (Libro l : libros) {
+			copia.add(l);
+		}
+		return copia;
 	}
 	
 }

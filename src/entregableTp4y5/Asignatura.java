@@ -3,25 +3,38 @@ package entregableTp4y5;
 import java.util.ArrayList;
 
 public class Asignatura {
-	private Alumno a;
-	private int puntajeMin;
 	
-	public Asignatura(Alumno a, int puntajeMin) {
-		super();
-		this.a = a;
-		this.puntajeMin = puntajeMin;
+	private ArrayList<Alumno> alumnos;
+	private int nota;
+
+	private CSVReaderAlumnos alumnoReader;
+
+	public Asignatura(int nota, String path) {
+
+		this.nota = nota;
+		alumnoReader = new CSVReaderAlumnos();
+		alumnoReader.setPath(path);
+		alumnos = alumnoReader.read();
+	}
+
+	public int nota() {
+		return nota;
+	}
+
+	public ArrayList<Alumno> getAlumnos() {
+		ArrayList<Alumno> copia = new ArrayList<>();
+
+		for (Alumno a : alumnos) {
+			copia.add(a.clone());
+		}
+		return copia;
 	}
 	
-	public Alumno getA() {
-		return a;
-	}
-	public void setA(Alumno a) {
-		this.a = a;
-	}
-	public int getPuntajeMin() {
-		return puntajeMin;
-	}
-	public void setPuntajeMin(int puntajeMin) {
-		this.puntajeMin = puntajeMin;
+	public void imprimirAlumnos(String info, ArrayList<Alumno> alumnos) {
+		System.out.println(info);
+		for (int i = 0; i < alumnos.size(); i++) {
+			System.out.println(alumnos.get(i));
+		}
+		System.out.println();
 	}
 }
