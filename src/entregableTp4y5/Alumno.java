@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class Alumno implements Comparable<Alumno> {
 	
-	private int cantPuntaje;
+	private Integer cantPuntaje;
 	private String id;
 	
 	private HashSet<Libro> ejempLeidos;
@@ -53,6 +53,10 @@ public class Alumno implements Comparable<Alumno> {
 		return (ejempLeidos.isEmpty()) ? "empty" : ejempLeidos.toString();
 	}
 	
+	public boolean estaAsignado(String idLibro) {
+		return this.ejempLeidos.contains(idLibro);
+	}
+	
 	public boolean estaAprobado(int nota) {	
 		return getCantPuntaje() >= nota;
 	}
@@ -65,9 +69,28 @@ public class Alumno implements Comparable<Alumno> {
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		Alumno o = (Alumno) obj;
+		if (!id.equals(o.id))
+			return false;
+
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return this.id + " = \npuntaje: " + this.cantPuntaje ;
+	}
+	
+	@Override
 	public int compareTo(Alumno o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return  o.getCantPuntaje() - this.cantPuntaje;
+	}
+
+	public void restaurar(Libro libro) {
+
+		this.ejempLeidos.remove(libro);
+		this.cantPuntaje -= libro.getPuntaje();
 	}
 	
 }

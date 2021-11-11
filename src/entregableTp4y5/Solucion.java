@@ -14,11 +14,6 @@ public class Solucion {
 		iteraciones = 0;
 	}
 	
-	public void incremAlumnosAprob() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void add(Alumno alumno) {
 		
 		if (!alumnos.add(alumno)) {
@@ -26,11 +21,6 @@ public class Solucion {
 			alumnos.add(alumno);
 		}
 		this.setAlumnosAp(alumnosAp);
-	}
-
-	private void remove(Alumno alumno) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void setAlumnosAp(int alumnosAp) {
@@ -41,6 +31,15 @@ public class Solucion {
 		return this.alumnosAp;
 	}
 	
+//	public void incremAlumnosAprob() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+	private void remove(Alumno alumno) {
+		alumnos.remove(alumno);
+	}
+
 	public void setIteracion(int i) {
 		this.iteraciones = i;
 	}
@@ -52,5 +51,18 @@ public class Solucion {
 		}
 		copia.setAlumnosAp(this.alumnosAp);
 		return copia;
+	}
+	
+	public String toString() {
+		String info = "Libros Entregados\n";
+		for (Alumno a : alumnos) {
+			if (!a.librosLeidos().equals("empty")) {
+				info += a + "\nLibros: ";
+				info += a.librosLeidos() + "\n";
+			}
+		}
+		info += "iteraciones: " + iteraciones + "\n";
+		info += "Alumnos aprobados: " + alumnosAp;
+		return info;
 	}
 }

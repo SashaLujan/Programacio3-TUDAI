@@ -13,6 +13,9 @@ public class Greedy {
 		int contL = 0;
 	}
 	
+	//este metodo va a informar la asignacion de los libros a los alumnos
+	//el parametro que se pasa de la biblioteca va a tener la lista de libros
+	//y el parametro asignatura va a tener la lista de alumnos y las condiciones para poder aprobar
 	public Solucion greedy(Biblioteca biblioteca, Asignatura asignatura) {
 
 		ArrayList<Libro> libros = biblioteca.getLibros();
@@ -48,7 +51,7 @@ public class Greedy {
 				while(alumnos.get(indexA).getCantPuntaje() < nota && indexL != -1) {
 					indexL = seleccionarLibro(alumno, libros, nota, indexL);
 					
-					if(indexL != -1) {
+					if(indexL != -1) { //se le asigna un libro a el alumno
 						Libro libro = libros.get(indexL);
 						alumno.leerLibro(libro.clone());
 						
@@ -75,6 +78,8 @@ public class Greedy {
 		return solucion;
 	}
 	
+	//se le pasa un candidato (el alumno) y la lista de lisbro que tidavia no fueron asignados
+	//el indice es la posicion donde comienza la busqueda
 	private int seleccionarLibro(Alumno alumno, ArrayList<Libro> libros, int nota, int indexL) {
 		
 		int salto = (int) Math.floor(libros.size() / 10);
@@ -94,43 +99,44 @@ public class Greedy {
 
 				sum = libros.get(indexL).getPuntaje() + p;
 
-				// el primer libro posible de leer
-				// no importa si se alcanza la nota de aprobacion
+				//el primer libro posible de leer
+				//no importa si se alcanza la nota de aprobacion
 				if (proPosible == -1) {
 					proPosible = indexL;
 				}
 
-				// ultimo libro posible de leer
-				// solo si se alcanza la nota de aprobacion
+				//ultimo libro posible de leer
+				//solo si se alcanza la nota de aprobacion
 				if (sum >= nota) {
 					ultPosible = indexL;
 				}
 
-				// optimizacion salto
+				//optimizacion salto
 				indexL += salto;
 			} else {
 				indexL++;
 			}
 		}
 
-		// ultimoPosible tiene puntaje mas cercano a la nota de aprobacion
-		// si nunca se alcanzo la nota de aprobacion se retorna el primero posible
+		//ultimo Posible tiene puntaje mas cercano a la nota de aprobacion
+		//si nunca se alcanzo la nota de aprobacion se retorna el primero posible
 		return (ultPosible == -1) ? proPosible : ultPosible;
 	}
 
+	//se le pasa como parametro la lista de alumnos, el indice es donde comienza la busqueda
 	private int seleccionarAlumno(int index, ArrayList<Alumno> alumnos, int nota) {
 		
 		if(index == -1) {
 			return index;
 		}
 		
-		boolean find = false;
+		boolean fin = false;
 		
-		while(index < alumnos.size() && !find) {
+		while(index < alumnos.size() && !fin) {
 			contA++;
-			find = alumnos.get(index).getCantPuntaje() < nota;
+			fin = alumnos.get(index).getCantPuntaje() < nota;
 			
-			if(!find) {
+			if(!fin) {
 				index++;
 			}
 		}

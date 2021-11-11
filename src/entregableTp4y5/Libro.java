@@ -2,7 +2,7 @@ package entregableTp4y5;
 
 public class Libro implements Comparable<Libro> {
 
-	private String id;
+	private String idLibro;
 	private String titulo;
 	private String autor;
 	private String genero;
@@ -13,7 +13,7 @@ public class Libro implements Comparable<Libro> {
 	public Libro(String idLibro, String titulo, String autor, String genero, Integer cantPaginas, Integer cantEjemDispo,
 			Integer puntaje) {
 
-		this.id = idLibro;
+		this.idLibro = idLibro;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.genero = genero;
@@ -30,6 +30,14 @@ public class Libro implements Comparable<Libro> {
 		this.titulo = nombre;
 	}
 
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+	
 	public String getGenero() {
 		return genero;
 	}
@@ -46,7 +54,7 @@ public class Libro implements Comparable<Libro> {
 		this.cantPaginas = cantPaginas;
 	}
 
-	public int getPuntaje() {
+	public Integer getPuntaje() {
 		return puntaje;
 	}
 
@@ -55,19 +63,36 @@ public class Libro implements Comparable<Libro> {
 	}
 	
 	public String id() {
-		return id;
+		return idLibro;
 	}
 	
 	@Override
 	public Libro clone() {
-		return new Libro(id, titulo, autor, genero, cantPaginas, puntaje, cantEjemDispo);
+		return new Libro(idLibro, titulo, autor, genero, cantPaginas, puntaje, cantEjemDispo);
 	}
 
 	@Override
 	public String toString() {
-		return this.id + " = " + this.puntaje;
+		return this.idLibro + " = " + this.puntaje;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Libro o = (Libro) obj;
+		if (idLibro == null) {
+			if (o.idLibro != null)
+				return false;
+		} else if (!idLibro.equals(o.idLibro))
+			return false;
+		return true;
+	}
+	
 	@Override
 	public int compareTo(Libro o) {
 		return o.getPuntaje() - this.puntaje;

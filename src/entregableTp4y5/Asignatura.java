@@ -10,7 +10,6 @@ public class Asignatura {
 	private CSVReaderAlumnos alumnoReader;
 
 	public Asignatura(int nota, String path) {
-
 		this.nota = nota;
 		alumnoReader = new CSVReaderAlumnos();
 		alumnoReader.setPath(path);
